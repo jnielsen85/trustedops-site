@@ -4,8 +4,9 @@ import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
 
 const nav = [
+  { href: "/", label: "Home"},
   { href: "/how-it-works", label: "How it works" },
-  { href: "/services", label: "services & teams" },
+  { href: "/services", label: "Services & Roles" },
   { href: "/security", label: "Security & ops" },
   { href: "/resources", label: "Resources" },
 ];
