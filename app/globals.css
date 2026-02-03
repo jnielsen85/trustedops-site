@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-brand-navy antialiased;
+}
+
+/* Better default focus rings */
+:focus-visible {
+  outline: 2px solid theme(colors.brand.teal);
+  outline-offset: 2px;
+}

@@ -1,0 +1,13 @@
+:root {
+    /* Store as RGB channels to support Tailwind opacity utilities */
+    --to-navy: 11 27 58;   /* #0B1B3A */
+    --to-teal: 17 150 204; /* #1196CC */
+  
+    --to-ink:  15 23 42;   /* #0F172A */
+    --to-slate:51 65 85;   /* #334155 */
+    --to-muted:148 163 184;/* #94A3B8 */
+    --to-border:226 232 240;/* #E2E8F0 */
+  
+    --to-bg:   247 250 252;/* #F7FAFC */
+    --to-white:255 255 255;/* #FFFFFF */
+  }
