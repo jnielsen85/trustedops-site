@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ContactForm } from "@/components/ContactForm";
 
-export const metadata: Metadata = { title: "Book a call" };
+export const metadata: Metadata = { title: "Contact Us" };
 
 type SP = { sent?: string; error?: string };
 
@@ -18,7 +18,7 @@ export default async function ContactPage({
 
   return (
     <Container className="py-16">
-      <h1 className="text-4xl font-semibold tracking-tight">Book a call</h1>
+      <h1 className="text-4xl font-semibold tracking-tight">Contact Us</h1>
       <p className="mt-4 max-w-2xl text-base text-brand-navy/70">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Replace this
         with a calendar embed + minimal form.
@@ -42,9 +42,16 @@ export default async function ContactPage({
         </div>
 
         <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-black/[0.02] to-black/[0.04] p-6 shadow-soft">
-          <div className="text-sm font-semibold">Calendar embed (placeholder)</div>
+          <div className="text-sm font-semibold">Want to chat with us?</div>
           <div className="mt-4 rounded-2xl border border-black/10 bg-white p-6 text-sm text-brand-navy/70">
-            Paste Calendly / HubSpot Meetings embed here.
+          <a
+  href="https://calendar.app.google/efdm6a8CSfFjEXSdA"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-sm font-semibold text-brand-teal hover:underline"
+>
+  Book a 30-minute call
+</a>
           </div>
         </div>
       </div>

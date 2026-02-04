@@ -75,6 +75,7 @@ const teams = [
 export default function ServicesPage() {
   return (
     <Container className="py-16">
+     <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white p-8 shadow-soft">
       {/* Top bar */}
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
@@ -109,7 +110,7 @@ export default function ServicesPage() {
           </Link>
         </div>
       </div>
-
+     </div>
       {/* Grid */}
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {teams.map((t) => (
@@ -143,7 +144,7 @@ export default function ServicesPage() {
             href="/contact"
             className="inline-flex items-center justify-center rounded-full bg-brand-teal px-6 py-3 text-sm font-semibold text-white shadow-soft hover:opacity-95"
           >
-            Book a call
+            Contact Us
           </Link>
         </div>
       </div>

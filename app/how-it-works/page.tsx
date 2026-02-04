@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/Container";
 
 export const metadata: Metadata = {
-  title: "How it works",
+  title: "what we do",
   description:
     "Reduce the drag of hiring and scale capability with offshore team members backed by a managed operations backbone.",
 };
@@ -57,42 +56,26 @@ const ownership = [
 export default function HowItWorksPage() {
   return (
     <Container className="py-16">
-      {/* Header (aligned like Services) */}
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <div>
-          <div className="text-sm font-semibold text-brand-navy/60">How it works</div>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-            Lower overhead. Increased capability.
-          </h1>
+      <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white p-8 shadow-soft">
+      {/* Header */}
+      <div>
+        <div className="text-sm font-semibold text-brand-navy/60">what we do</div>
+        <h1 className="mt-2 text-4xl font-semibold tracking-tight">
+          Lower overhead. Increased capability.
+        </h1>
 
-          <p className="mt-4 max-w-3xl text-base text-brand-navy/70">
+        <p className="mt-4 max-w-3xl text-base text-brand-navy/70">
           Hiring eats leadership time, attention and budget well beyond base salary. TrustedOps reduces the drag: we
           recruit and stand up offshore team members in the Philippines, then put the operational
           foundation in place so work keeps moving, standards stay high and both parties are setup for success.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-brand-navy shadow-soft hover:bg-black/[0.02]"
-          >
-            Home
-          </Link>
-
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-brand-teal px-6 py-3 text-sm font-semibold text-white shadow-soft hover:opacity-95"
-          >
-            Let’s Talk
-          </Link>
-        </div>
+        </p>
       </div>
 
       {/* Stats */}
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label} className="rounded-2xl border border-black/10 bg-white p-4 shadow-soft">
+            
             <div className="text-2xl font-semibold tracking-tight">{s.value}</div>
             <div className="mt-1 text-xs font-semibold text-brand-navy/70">{s.label}</div>
           </div>
@@ -102,12 +85,15 @@ export default function HowItWorksPage() {
       <p className="mt-4 text-xs text-brand-navy/60">
         Benchmarks vary by role, seniority, and market conditions.
       </p>
-
+      </div>
       {/* Steps */}
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         {steps.map((s) => (
-          <div key={s.title} className="rounded-3xl border border-black/10 bg-white p-6 shadow-soft">
-            <div className="text-sm font-semibold">{s.title}</div>
+          <div key={s.title} className="rounded-3xl border border-black/10 bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md">
+            <div className="flex items-start gap-3">
+  <span className="mt-1 h-2.5 w-2.5 rounded-full bg-brand-teal" />
+  <div className="text-sm font-semibold text-brand-navy">{s.title}</div>
+</div>
             <p className="mt-2 text-sm text-brand-navy/70">{s.body}</p>
           </div>
         ))}

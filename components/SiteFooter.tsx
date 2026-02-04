@@ -21,7 +21,7 @@ export function SiteFooter() {
             <div className="space-y-3">
               <div className="font-semibold">Company</div>
               <ul className="space-y-2 text-brand-navy/70">
-                <li><Link href="/how-it-works" className="hover:text-brand-navy">How it works</Link></li>
+                <li><Link href="/how-it-works" className="hover:text-brand-navy">what we do</Link></li>
                 <li><Link href="/services" className="hover:text-brand-navy">services & teams</Link></li>
                 <li><Link href="/security" className="hover:text-brand-navy">Security & ops</Link></li>
               </ul>
@@ -31,7 +31,7 @@ export function SiteFooter() {
               <div className="font-semibold">Resources</div>
               <ul className="space-y-2 text-brand-navy/70">
                 <li><Link href="/resources" className="hover:text-brand-navy">Articles</Link></li>
-                <li><Link href="/contact" className="hover:text-brand-navy">Book a call</Link></li>
+                <li><Link href="/contact" className="hover:text-brand-navy">Contact Us</Link></li>
               </ul>
             </div>
 
