@@ -95,12 +95,12 @@ export default function ServicesPage() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
+        {/* <Link
             href="/"
             className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-brand-navy shadow-soft hover:bg-black/[0.02]"
           >
             Home
-          </Link>
+          </Link> */}
 
           <Link
             href="/contact"
@@ -110,9 +110,10 @@ export default function ServicesPage() {
           </Link>
         </div>
       </div>
-     </div>
+     </div> 
       {/* Grid */}
       <div className="mt-10 grid gap-6 md:grid-cols-2">
+        
         {teams.map((t) => (
           <div
             key={t.name}
