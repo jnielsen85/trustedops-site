@@ -39,6 +39,29 @@ export default async function ResourcesPage() {
           </div>
         </Link>
 
+        {/* Pinned tool: 30/60/90 Ramp Plan */}
+        <Link
+          href="/resources/ramp-plan"
+          className="group rounded-3xl border border-brand-teal/20 bg-brand-teal/5 p-6 shadow-soft transition hover:-translate-y-0.5"
+        >
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="mb-2 inline-flex items-center rounded-full border border-brand-teal/30 px-2 py-0.5 text-[11px] font-bold tracking-widest text-brand-teal uppercase">
+                Tool
+              </div>
+              <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
+                30/60/90 Ramp Plan
+              </div>
+              <div className="mt-1 text-sm text-brand-navy/70">
+                Structure onboarding with clear learning goals, deliverables, and ownership milestones at 30, 60, and 90 days.
+              </div>
+            </div>
+            <div className="shrink-0 text-xs font-semibold tracking-widest text-brand-teal uppercase">
+              Open →
+            </div>
+          </div>
+        </Link>
+
         {/* MDX articles */}
         {resources.map((r) => (
           <Link
