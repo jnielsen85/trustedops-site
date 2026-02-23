@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Container } from '@/components/Container';
 import { RoleScorecardForm } from '@/components/RoleScorecardForm';
+import { RoleScorecardGuide } from '@/components/RoleScorecardGuide';
 
 export const metadata: Metadata = {
   title: 'Role Scorecard | TrustedOps Resources',
@@ -20,6 +21,7 @@ export default function RoleScorecardPage() {
           * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}</style>
+      <RoleScorecardGuide />
       <Container className="py-10 print:max-w-none print:px-0 print:py-0">
         <Link
           href="/resources"
