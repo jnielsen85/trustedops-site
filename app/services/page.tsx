@@ -56,7 +56,7 @@ const teams = [
       "Listings & marketing admin",
       "CRM / database management",
       "Leasing support (applications, screening packs)",
-      "Maarket Research",
+      "Market Research",
       "Document prep (contracts, forms, inspections)",
     ],
   },
