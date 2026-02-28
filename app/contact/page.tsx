@@ -19,9 +19,8 @@ export default async function ContactPage({
   return (
     <Container className="py-16">
       <h1 className="text-4xl font-semibold tracking-tight">Contact Us</h1>
-      <p className="mt-4 max-w-2xl text-base text-brand-navy/70">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Replace this
-        with a calendar embed + minimal form.
+      <p className="mt-4 max-w-2xl text-justify text-base text-brand-navy/70">
+        Tell us about the roles you're looking to fill or the outcomes you need. We'll get back to you within one business day to understand your situation and explore how TrustedOps can help.
       </p>
 
       {sent && (

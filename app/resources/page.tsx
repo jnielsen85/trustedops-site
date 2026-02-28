@@ -11,7 +11,7 @@ export default async function ResourcesPage() {
   return (
     <Container className="py-16">
       <h1 className="text-4xl font-semibold tracking-tight">Resources</h1>
-      <p className="mt-4 max-w-2xl text-base text-brand-navy/70">
+      <p className="mt-4 max-w-2xl text-justify text-base text-brand-navy/70">
         Guides, templates, and tools for building high-performance remote teams.
       </p>
 
@@ -29,7 +29,7 @@ export default async function ResourcesPage() {
               <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
                 Fully-Loaded Cost Calculator
               </div>
-              <div className="mt-1 text-sm text-brand-navy/70">
+              <div className="mt-1 text-justify text-sm text-brand-navy/70">
                 Compare Direct Hire vs EoR vs BPO — monthly cost, 12-month total, and savings vs local hire. Make "Better Talent Economics" tangible.
               </div>
             </div>
@@ -52,7 +52,7 @@ export default async function ResourcesPage() {
               <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
                 Role Scorecard
               </div>
-              <div className="mt-1 text-sm text-brand-navy/70">
+              <div className="mt-1 text-justify text-sm text-brand-navy/70">
                 Define outcomes, KPIs, scope, capabilities, and a 30/60/90 ramp plan for any role. Fill in and print.
               </div>
             </div>
@@ -75,7 +75,7 @@ export default async function ResourcesPage() {
               <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
                 30/60/90 Ramp Plan
               </div>
-              <div className="mt-1 text-sm text-brand-navy/70">
+              <div className="mt-1 text-justify text-sm text-brand-navy/70">
                 Structure onboarding with clear learning goals, deliverables, and ownership milestones at 30, 60, and 90 days.
               </div>
             </div>
@@ -97,7 +97,7 @@ export default async function ResourcesPage() {
                 <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
                   {r.frontmatter.title}
                 </div>
-                <div className="mt-1 text-sm text-brand-navy/70">{r.frontmatter.description}</div>
+                <div className="mt-1 text-justify text-sm text-brand-navy/70">{r.frontmatter.description}</div>
               </div>
               <div className="text-xs font-semibold tracking-widest text-brand-teal uppercase">
                 {new Date(r.frontmatter.date).toLocaleDateString("en-AU", { year: "numeric", month: "short", day: "2-digit" })}

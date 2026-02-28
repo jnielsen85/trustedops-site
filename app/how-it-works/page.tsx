@@ -64,7 +64,7 @@ export default function HowItWorksPage() {
           Lower overhead. Increased capability.
         </h1>
 
-        <p className="mt-4 max-w-3xl text-base text-brand-navy/70">
+        <p className="mt-4 max-w-[66rem] text-justify text-base text-brand-navy/70">
           Hiring eats leadership time, attention and budget well beyond base salary. TrustedOps reduces the drag: we
           recruit and stand up offshore team members in the Philippines, then put the operational
           foundation in place so work keeps moving, standards stay high and both parties are setup for success.
@@ -94,7 +94,7 @@ export default function HowItWorksPage() {
   <span className="mt-1 h-2.5 w-2.5 rounded-full bg-brand-teal" />
   <div className="text-sm font-semibold text-brand-navy">{s.title}</div>
 </div>
-            <p className="mt-2 text-sm text-brand-navy/70">{s.body}</p>
+            <p className="mt-2 text-justify text-sm text-brand-navy/70">{s.body}</p>
           </div>
         ))}
       </div>

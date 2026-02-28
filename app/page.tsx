@@ -18,7 +18,7 @@ export default function HomePage() {
                 Better Talent Economics
               </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-brand-navy/70">
+              <p className="mt-5 max-w-xl text-justify text-base leading-relaxed text-brand-navy/70">
                 Add capability without adding complexity. We help you hire great offshore team members while
                 providing a light-touch ops layer so delivery stays consistent as you grow.{" "}
                 <span className="font-semibold text-brand-navy">More capacity. Lower costs.</span>
@@ -65,7 +65,7 @@ export default function HomePage() {
 
                 <div className="mt-6 rounded-2xl bg-white p-4">
                   <div className="text-xs font-semibold tracking-widest text-brand-teal uppercase">Next step</div>
-                  <div className="mt-2 text-sm text-brand-navy/70">
+                  <div className="mt-2 text-justify text-sm text-brand-navy/70">
                     Tell us your hiring needs and the outcomes you want—we’ll help shape the right offshore team and
                     a simple operating model.{" "}
                     <Link
@@ -105,7 +105,7 @@ export default function HomePage() {
             <div key={c.step} className="rounded-3xl border border-black/10 bg-white p-6 shadow-soft">
               <div className="text-xs font-semibold tracking-widest text-brand-teal uppercase">{c.step}</div>
               <div className="mt-2 text-lg font-semibold text-brand-navy">{c.title}</div>
-              <p className="mt-2 text-sm text-brand-navy/70">{c.body}</p>
+              <p className="mt-2 text-justify text-sm text-brand-navy/70">{c.body}</p>
             </div>
           ))}
         </div>
@@ -113,7 +113,7 @@ export default function HomePage() {
 
       <Section eyebrow="Resources" title="Practical playbooks">
         <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-soft">
-          <p className="text-sm text-brand-navy/70">
+          <p className="text-justify text-sm text-brand-navy/70">
             Start with proven playbooks for role design, onboarding, and operating rhythm—so your team ramps quickly
             and stays consistent.
           </p>

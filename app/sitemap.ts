@@ -1,14 +1,14 @@
 import { MetadataRoute } from "next";
 import { getAllResourceSlugs } from "@/lib/mdx";
+import { SERVICES } from "@/lib/services-data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://trustedops.example";
+  const base = "https://trustedops.team";
 
   const staticRoutes = [
     "",
     "/how-it-works",
     "/services",
-    "/security",
     "/resources",
     "/contact",
   ].map((p) => ({
@@ -16,6 +16,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: p === "" ? 1 : 0.7,
+  }));
+
+  const categoryRoutes = SERVICES.map((cat) => ({
+    url: `${base}/services/${cat.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
   }));
 
   const slugs = await getAllResourceSlugs();
@@ -26,5 +33,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...resourceRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...resourceRoutes];
 }
