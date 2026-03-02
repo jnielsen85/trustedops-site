@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '@/components/Container';
 import { SERVICES } from '@/lib/services-data';
@@ -13,9 +14,9 @@ export default function ServicesPage() {
   return (
     <Container className="py-16">
       {/* Hero card */}
-      <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white p-8 shadow-soft">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
+      <div className="overflow-hidden rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white shadow-soft">
+        <div className="grid lg:grid-cols-[1fr_340px]">
+          <div className="p-8 lg:p-10">
             <div className="text-sm font-semibold text-brand-navy/60">Roles</div>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-brand-navy">
               Add Teammates, Not Overhead
@@ -25,13 +26,25 @@ export default function ServicesPage() {
               without the BPO feel. We recruit the right people, embed them into your way of
               working, and support them so delivery stays consistent as you grow.
             </p>
+            <Link
+              href="/contact"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-brand-teal px-6 py-3 text-sm font-semibold text-white shadow-soft hover:opacity-95"
+            >
+              Talk to us
+            </Link>
           </div>
-          <Link
-            href="/contact"
-            className="shrink-0 inline-flex items-center justify-center rounded-full bg-brand-teal px-6 py-3 text-sm font-semibold text-white shadow-soft hover:opacity-95"
-          >
-            Talk to us
-          </Link>
+          <div className="relative hidden lg:block">
+            <Image
+              src="/brand/phmanhomework.jpg"
+              alt="Offshore team member working at a desk"
+              fill
+              className="object-cover object-left"
+              priority
+            />
+            {/* Fade: left edge into card background, soft top and bottom */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/50" />
+          </div>
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 
 export const metadata: Metadata = {
@@ -56,35 +57,50 @@ const ownership = [
 export default function HowItWorksPage() {
   return (
     <Container className="py-16">
-      <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white p-8 shadow-soft">
-      {/* Header */}
-      <div>
-        <div className="text-sm font-semibold text-brand-navy/60">what we do</div>
-        <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-          Lower overhead. Increased capability.
-        </h1>
+      <div className="overflow-hidden rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white shadow-soft">
+        <div className="grid lg:grid-cols-[1fr_340px]">
 
-        <p className="mt-4 max-w-[66rem] text-justify text-base text-brand-navy/70">
-          Hiring eats leadership time, attention and budget well beyond base salary. TrustedOps reduces the drag: we
-          recruit and stand up offshore team members in the Philippines, then put the operational
-          foundation in place so work keeps moving, standards stay high and both parties are setup for success.
-        </p>
-      </div>
+          {/* Text + stats column */}
+          <div className="p-8 lg:p-10">
+            <div className="text-sm font-semibold text-brand-navy/60">what we do</div>
+            <h1 className="mt-2 text-4xl font-semibold tracking-tight">
+              Lower overhead. Increased capability.
+            </h1>
+            <p className="mt-4 text-justify text-base text-brand-navy/70">
+              Hiring eats leadership time, attention and budget well beyond base salary. TrustedOps reduces the drag: we
+              recruit and stand up offshore team members in the Philippines, then put the operational
+              foundation in place so work keeps moving, standards stay high and both parties are setup for success.
+            </p>
 
-      {/* Stats */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="rounded-2xl border border-black/10 bg-white p-4 shadow-soft">
-            
-            <div className="text-2xl font-semibold tracking-tight">{s.value}</div>
-            <div className="mt-1 text-xs font-semibold text-brand-navy/70">{s.label}</div>
+            {/* Stats */}
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {stats.map((s) => (
+                <div key={s.label} className="rounded-2xl border border-black/10 bg-white p-4 shadow-soft">
+                  <div className="text-2xl font-semibold tracking-tight">{s.value}</div>
+                  <div className="mt-1 text-xs font-semibold text-brand-navy/70">{s.label}</div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-3 text-xs text-brand-navy/60">
+              Benchmarks vary by role, seniority, and market conditions.
+            </p>
           </div>
-        ))}
-      </div>
 
-      <p className="mt-4 text-xs text-brand-navy/60">
-        Benchmarks vary by role, seniority, and market conditions.
-      </p>
+          {/* Image column */}
+          <div className="relative hidden lg:block">
+            <Image
+              src="/brand/phonphone.jpg"
+              alt="Offshore team member on a call at their desk"
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            {/* Fade: left edge into card background, soft top and bottom */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/50" />
+          </div>
+
+        </div>
       </div>
       {/* Steps */}
       <div className="mt-10 grid gap-6 md:grid-cols-3">

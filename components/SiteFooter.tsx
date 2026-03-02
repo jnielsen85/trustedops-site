@@ -13,7 +13,7 @@ export function SiteFooter() {
               TrustedOps — Better Talent Economics.
             </p>
             <p className="mt-3 text-sm text-brand-navy/60">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+              We help Australian businesses hire and manage offshore team members in the Philippines — with the operational support to make it work.
             </p>
           </div>
 
@@ -21,9 +21,9 @@ export function SiteFooter() {
             <div className="space-y-3">
               <div className="font-semibold">Company</div>
               <ul className="space-y-2 text-brand-navy/70">
-                <li><Link href="/how-it-works" className="hover:text-brand-navy">what we do</Link></li>
-                <li><Link href="/services" className="hover:text-brand-navy">services & teams</Link></li>
-                <li><Link href="/security" className="hover:text-brand-navy">Security & ops</Link></li>
+                <li><Link href="/how-it-works" className="hover:text-brand-navy">What we do</Link></li>
+                <li><Link href="/services" className="hover:text-brand-navy">Roles</Link></li>
+                <li><Link href="/pricing" className="hover:text-brand-navy">Pricing</Link></li>
               </ul>
             </div>
 

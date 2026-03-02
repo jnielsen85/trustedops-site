@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '@/components/Container';
 
@@ -22,14 +23,30 @@ export default function PricingPage() {
     <Container className="py-16">
 
       {/* ── Hero ────────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white p-8 shadow-soft">
-        <div className="text-sm font-semibold text-brand-navy/60">Pricing</div>
-        <h1 className="mt-2 text-4xl font-semibold tracking-tight text-brand-navy">
-          Simple, transparent pricing
-        </h1>
-        <p className="mt-4 max-w-2xl text-justify text-base text-brand-navy/70">
-          One flat fee covers employment contracts, payroll, HR admin and operational support. No hidden costs.
-        </p>
+      <div className="overflow-hidden rounded-3xl border border-black/10 bg-gradient-to-br from-brand-teal/[0.06] to-white shadow-soft">
+        <div className="grid lg:grid-cols-[1fr_340px]">
+          <div className="p-8 lg:p-10">
+            <div className="text-sm font-semibold text-brand-navy/60">Pricing</div>
+            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-brand-navy">
+              Simple, transparent pricing
+            </h1>
+            <p className="mt-4 max-w-xl text-justify text-base text-brand-navy/70">
+              One flat fee covers employment contracts, payroll, HR admin and operational support. No hidden costs.
+            </p>
+          </div>
+          <div className="relative hidden lg:block">
+            <Image
+              src="/brand/phladysolowroking.jpg"
+              alt="Offshore team member working at a laptop"
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            {/* Fade: left edge into card background, soft top and bottom */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/50" />
+          </div>
+        </div>
       </div>
 
       {/* ── EOR / Management Fee ────────────────────────────────────────────── */}

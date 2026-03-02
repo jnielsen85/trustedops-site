@@ -15,7 +15,13 @@ export default async function ResourcesPage() {
         Guides, templates, and tools for building high-performance remote teams.
       </p>
 
-      <div className="mt-10 grid gap-6">
+      {/* ── Tools ──────────────────────────────────────────────────────────── */}
+      <div className="mt-10">
+        <div className="text-xs font-semibold tracking-widest uppercase text-brand-navy/40">Tools</div>
+        <h2 className="mt-1 text-xl font-semibold tracking-tight text-brand-navy">Interactive tools &amp; templates</h2>
+      </div>
+
+      <div className="mt-5 grid gap-6">
         {/* Pinned tool: Cost Calculator */}
         <Link
           href="/resources/cost-calculator"
@@ -30,7 +36,7 @@ export default async function ResourcesPage() {
                 Fully-Loaded Cost Calculator
               </div>
               <div className="mt-1 text-justify text-sm text-brand-navy/70">
-                Compare Direct Hire vs EoR vs BPO — monthly cost, 12-month total, and savings vs local hire. Make "Better Talent Economics" tangible.
+                Compare Direct Hire vs EoR vs BPO — monthly cost, 12-month total, and savings vs local hire. Make &quot;Better Talent Economics&quot; tangible.
               </div>
             </div>
             <div className="shrink-0 text-xs font-semibold tracking-widest text-brand-teal uppercase">
@@ -84,28 +90,38 @@ export default async function ResourcesPage() {
             </div>
           </div>
         </Link>
-
-        {/* MDX articles */}
-        {resources.map((r) => (
-          <Link
-            key={r.slug}
-            href={`/resources/${r.slug}`}
-            className="group rounded-3xl border border-black/10 bg-white p-6 shadow-soft transition hover:-translate-y-0.5"
-          >
-            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-              <div>
-                <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
-                  {r.frontmatter.title}
-                </div>
-                <div className="mt-1 text-justify text-sm text-brand-navy/70">{r.frontmatter.description}</div>
-              </div>
-              <div className="text-xs font-semibold tracking-widest text-brand-teal uppercase">
-                {new Date(r.frontmatter.date).toLocaleDateString("en-AU", { year: "numeric", month: "short", day: "2-digit" })}
-              </div>
-            </div>
-          </Link>
-        ))}
       </div>
+
+      {/* ── Articles ───────────────────────────────────────────────────────── */}
+      {resources.length > 0 && (
+        <>
+          <div className="mt-14">
+            <div className="text-xs font-semibold tracking-widest uppercase text-brand-navy/40">Articles</div>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight text-brand-navy">Guides &amp; insights</h2>
+          </div>
+          <div className="mt-5 grid gap-6">
+            {resources.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/resources/${r.slug}`}
+                className="group rounded-3xl border border-black/10 bg-white p-6 shadow-soft transition hover:-translate-y-0.5"
+              >
+                <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <div className="text-lg font-semibold text-brand-navy group-hover:underline decoration-brand-teal/60 underline-offset-4">
+                      {r.frontmatter.title}
+                    </div>
+                    <div className="mt-1 text-justify text-sm text-brand-navy/70">{r.frontmatter.description}</div>
+                  </div>
+                  <div className="shrink-0 text-xs font-semibold tracking-widest text-brand-teal uppercase">
+                    {new Date(r.frontmatter.date).toLocaleDateString("en-AU", { year: "numeric", month: "short", day: "2-digit" })}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
     </Container>
   );
 }

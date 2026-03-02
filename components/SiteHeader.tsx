@@ -3,9 +3,12 @@ import { Container } from "@/components/Container";
 import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
 
-const nav = [
+const navBefore = [
   { href: "/", label: "Home" },
   { href: "/how-it-works", label: "What we do" },
+];
+
+const navAfter = [
   { href: "/pricing", label: "Pricing" },
   { href: "/resources", label: "Resources" },
 ];
@@ -25,7 +28,7 @@ export function SiteHeader({ className }: { className?: string }) {
       <Container className="flex h-16 items-center justify-between">
         <Logo />
         <nav className="hidden items-center gap-6 md:flex">
-          {nav.map((item) => (
+          {navBefore.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -77,6 +80,16 @@ export function SiteHeader({ className }: { className?: string }) {
               </div>
             </div>
           </div>
+
+          {navAfter.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-medium text-brand-navy/80 hover:text-brand-navy"
+            >
+              {item.label}
+            </Link>
+          ))}
 
           <Link
             href="/contact"
