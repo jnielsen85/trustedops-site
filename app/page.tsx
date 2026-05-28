@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
+import { HeroImage } from "@/components/HeroImage";
 
 export default function HomePage() {
   return (
@@ -13,14 +13,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           {/* Image starts at 22% from left — more zoom-out, right edge may clip */}
           <div className="absolute top-0 bottom-0 left-[22%] right-0">
-            <Image
-              src="/brand/twophworking.jpg"
-              alt="Two people working together at a desk"
-              fill
-              className="object-cover"
-              style={{ objectPosition: 'center 8%' }}
-              priority
-            />
+            <HeroImage />
           </div>
           {/* Gradient: solid white on left, fading to transparent on right */}
           <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/70 via-[52%] to-transparent" />

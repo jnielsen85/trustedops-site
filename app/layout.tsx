@@ -5,6 +5,7 @@ import "./tokens.css";
 import "react-international-phone/style.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { LaunchDarklyProvider } from "@/components/LaunchDarklyProvider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,9 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.className}>
       <body className={inter.className}>
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <LaunchDarklyProvider>
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </LaunchDarklyProvider>
       </body>
     </html>
   );
