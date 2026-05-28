@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # env files
 .env*
+
+# local dev tool config
+.claude/
+skills-lock.json
+tsconfig.tsbuildinfo
