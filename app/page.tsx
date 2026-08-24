@@ -9,11 +9,14 @@ export default function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[620px] overflow-hidden flex items-center">
 
-        {/* Full-bleed photo */}
+        {/* Photo, right edge aligned to the content container (not the viewport edge) */}
         <div className="absolute inset-0">
-          {/* Image starts at 22% from left — more zoom-out, right edge may clip */}
-          <div className="absolute top-0 bottom-0 left-[22%] right-0">
-            <HeroImage />
+          {/* Constrain to the same max width as the rest of the page */}
+          <div className="relative mx-auto h-full w-full max-w-6xl px-6">
+            {/* Image starts at 22% from left; right edge stops at the content column */}
+            <div className="absolute top-0 bottom-0 left-[22%] right-6 overflow-hidden rounded-3xl">
+              <HeroImage />
+            </div>
           </div>
           {/* Gradient: solid white on left, fading to transparent on right */}
           <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/70 via-[52%] to-transparent" />
