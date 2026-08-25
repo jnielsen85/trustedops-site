@@ -13,13 +13,24 @@ export default function HomePage() {
         <div className="absolute inset-0">
           {/* Constrain to the same max width as the rest of the page */}
           <div className="relative mx-auto h-full w-full max-w-6xl px-6">
-            {/* Image starts at 22% from left; right edge stops at the content column */}
-            <div className="absolute top-0 bottom-0 left-[22%] right-6 overflow-hidden rounded-3xl">
+            {/* Image starts at 22% from left; right edge stops at the content column.
+                A mask fades the image's own left pixels to transparent so it washes
+                into the white behind it with no hard edge. */}
+            <div
+              className="absolute top-0 bottom-0 left-[22%] right-6 overflow-hidden rounded-3xl"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 30%, #000 55%)",
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 30%, #000 55%)",
+              }}
+            >
               <HeroImage />
             </div>
           </div>
-          {/* Gradient: solid white on left, fading to transparent on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/70 via-[52%] to-transparent" />
+          {/* Overlay: white base on the left (keeps hero text legible), fading to
+              transparent on the right so the photo shows through. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white from-[28%] via-white/60 via-[52%] to-transparent" />
         </div>
 
         {/* Content sits over the gradient */}
