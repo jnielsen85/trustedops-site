@@ -20,9 +20,9 @@ export default function HomePage() {
               className="absolute top-0 bottom-0 left-[22%] right-6 overflow-hidden rounded-3xl"
               style={{
                 WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 45%, #000 75%)",
+                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 30%, #000 55%)",
                 maskImage:
-                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 45%, #000 75%)",
+                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 30%, #000 55%)",
               }}
             >
               <HeroImage />
@@ -30,7 +30,7 @@ export default function HomePage() {
           </div>
           {/* Overlay: white base on the left (keeps hero text legible), fading to
               transparent on the right so the photo shows through. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white from-[32%] via-white/60 via-[60%] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white from-[28%] via-white/60 via-[52%] to-transparent" />
         </div>
 
         {/* Content sits over the gradient */}
