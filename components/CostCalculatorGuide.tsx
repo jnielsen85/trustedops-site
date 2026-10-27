@@ -1,3 +1,5 @@
+import { GuideBody, ToolGuide } from '@/components/ToolGuide';
+
 const PANELS = [
   {
     pill: 'Australian Direct Hire',
@@ -19,63 +21,16 @@ const PITFALLS = [
   'Assuming offshore = lower quality — when properly recruited and managed, offshore team members perform at equivalent levels.',
 ];
 
-const sectionLabel = 'mb-2 text-[11px] font-bold tracking-widest text-brand-navy/70 uppercase';
-
-/** Collapsible "About this calculator" panel, closed by default so the calculator is never blocked. */
 export function CostCalculatorGuide() {
   return (
-    <details className="group rounded-3xl border border-black/10 bg-white print:hidden">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 [&::-webkit-details-marker]:hidden">
-        <div>
-          <h2 className="text-lg font-bold text-brand-navy">About this calculator</h2>
-          <p className="mt-1 text-sm text-brand-navy/70">
-            What it compares and the costs most comparisons miss.
-          </p>
-        </div>
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 20 20"
-          className="h-5 w-5 shrink-0 text-brand-teal transition-transform group-open:rotate-180"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M5 8l5 5 5-5" />
-        </svg>
-      </summary>
-
-      <div className="border-t border-black/10 px-6 pb-6 pt-5">
-        <h3 className={sectionLabel}>What this tool does</h3>
-        <p className="max-w-prose text-[15px] leading-relaxed text-brand-navy/70">
-          Most hiring comparisons use base salary. This calculator shows the full picture — superannuation,
-          workers compensation, leave entitlements, equipment, and admin — so you can see the real
-          difference between hiring locally in Australia and building your team through TrustedOps.
-        </p>
-
-        {/* Three panels */}
-        <div className="mt-5 grid gap-3.5 md:grid-cols-3">
-          {PANELS.map(({ pill, body }) => (
-            <div key={pill} className="rounded-2xl border border-black/10 p-4">
-              <div className="mb-2.5 inline-flex items-center rounded-full border border-brand-teal/25 bg-brand-teal/5 px-2.5 py-1 text-[11px] font-bold tracking-wide text-brand-navy uppercase">
-                {pill}
-              </div>
-              <p className="text-sm leading-relaxed text-brand-navy/70">{body}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Pitfalls */}
-        <div className="mt-5 border-t border-black/10 pt-5">
-          <h3 className={sectionLabel}>Common calculation mistakes</h3>
-          <ul className="list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-brand-navy/70">
-            {PITFALLS.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </details>
+    <ToolGuide title="About this calculator" subtitle="What it compares and the costs most comparisons miss.">
+      <GuideBody
+        introLabel="What this tool does"
+        intro="Most hiring comparisons use base salary. This calculator shows the full picture — superannuation, workers compensation, leave entitlements, equipment, and admin — so you can see the real difference between hiring locally in Australia and building your team through TrustedOps."
+        panels={PANELS}
+        listLabel="Common calculation mistakes"
+        list={PITFALLS}
+      />
+    </ToolGuide>
   );
 }

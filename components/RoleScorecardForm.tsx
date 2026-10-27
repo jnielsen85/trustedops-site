@@ -28,11 +28,17 @@ const INITIAL_DATA = {
 type FormData = typeof INITIAL_DATA;
 
 const inputCls =
-  'w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm text-brand-navy ' +
-  'placeholder:text-brand-navy/25 outline-none focus:border-brand-teal ' +
+  'w-full border border-black/10 rounded-xl px-3 py-2.5 text-sm text-brand-navy ' +
+  'placeholder:text-brand-navy/40 outline-none focus:border-brand-teal ' +
   'focus:ring-2 focus:ring-brand-teal/10 transition';
 
 const textareaCls = inputCls + ' min-h-[88px] resize-y';
+
+const pillBtn =
+  'cursor-pointer rounded-full border border-black/10 bg-white px-5 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50';
+
+const printBtn =
+  'cursor-pointer rounded-full bg-brand-navy px-5 py-2 text-sm font-semibold text-white transition hover:opacity-90';
 
 const grid = 'grid grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-x-4';
 
@@ -47,7 +53,7 @@ function Field({
 }) {
   return (
     <div className={full ? 'md:col-span-2' : ''}>
-      <label className="mb-1.5 block text-[11px] font-bold tracking-wider uppercase text-brand-navy/50">
+      <label className="mb-1.5 block text-[11px] font-bold tracking-wider uppercase text-brand-navy/70">
         {label}
       </label>
       {children}
@@ -65,9 +71,9 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mt-5 border-t border-slate-100 pt-5">
-      <h2 className="mb-2 text-sm font-semibold text-brand-navy">{title}</h2>
-      {hint && <p className="mb-3.5 text-[13px] text-brand-navy/50">{hint}</p>}
+    <div className="mt-5 border-t border-black/10 pt-5">
+      <h2 className="mb-2 text-base font-bold text-brand-navy">{title}</h2>
+      {hint && <p className="mb-3.5 text-sm text-brand-navy/70">{hint}</p>}
       {children}
     </div>
   );
@@ -105,50 +111,32 @@ function RoleScorecard({ initial }: { initial: FormData }) {
     localStorage.removeItem(STORAGE_KEY);
   };
 
-  const handlePrint = () => window.print();
-
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-soft">
-      {/* Header */}
-      <div className="flex flex-wrap items-center gap-4 border-b-4 border-brand-teal px-6 py-5">
-        <Image
-          src="/brand/trustedops_logo_horizontal_lockup_color.svg"
-          alt="TrustedOps"
-          width={176}
-          height={44}
-          className="h-11 w-auto"
-          priority
-        />
-        <div className="flex-1">
-          <h1 className="text-xl font-semibold tracking-tight text-brand-navy">Role Scorecard</h1>
-          <p className="mt-1 text-[13px] text-brand-navy/50 print:hidden">
-            Fill in, then print or save as PDF.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2.5 print:hidden">
-          <button
-            type="button"
-            onClick={handleSave}
-            className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-          >
-            {savedMsg ? 'Saved!' : 'Save'}
-          </button>
-          <button
-            type="button"
-            onClick={handleClear}
-            className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-          >
-            Clear
-          </button>
-          <button
-            type="button"
-            onClick={handlePrint}
-            className="cursor-pointer rounded-xl border border-brand-navy bg-brand-navy px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
-          >
-            Print
-          </button>
-        </div>
+    <div>
+      {/* ── Toolbar ── */}
+      <div className="mb-5 flex flex-wrap justify-end gap-2.5 print:hidden">
+        <button type="button" onClick={handleSave} className={pillBtn}>
+          {savedMsg ? 'Saved!' : 'Save'}
+        </button>
+        <button type="button" onClick={handleClear} className={pillBtn}>
+          Clear
+        </button>
+        <button type="button" onClick={() => window.print()} className={printBtn}>
+          Print
+        </button>
       </div>
+
+      <div className="rounded-3xl border border-black/10 bg-white print:rounded-none print:border-0">
+        {/* Print-only header: the site header is hidden when printing, so this brands the page */}
+        <div className="hidden items-center gap-4 border-b-4 border-brand-teal px-6 py-5 print:flex">
+          <Image
+            src="/brand/trustedops_logo_horizontal_lockup_color.svg"
+            alt="TrustedOps"
+            width={264}
+            height={44}
+          />
+          <div className="text-xl font-semibold tracking-tight text-brand-navy">Role Scorecard</div>
+        </div>
 
       {/* Form body */}
       <form className="px-6 pb-8 pt-5" onSubmit={(e) => e.preventDefault()}>
@@ -308,6 +296,7 @@ function RoleScorecard({ initial }: { initial: FormData }) {
           </div>
         </FormSection>
       </form>
+      </div>
     </div>
   );
 }
