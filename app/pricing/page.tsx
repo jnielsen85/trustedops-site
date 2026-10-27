@@ -41,7 +41,7 @@ export default function PricingPage() {
         </p>
       </PageHero>
 
-      {/* ── EOR / Management Fee ────────────────────────────────────────────── */}
+      {/* ── Management fee ────────────────────────────────────────────────── */}
       <PageSection
         tone="grey"
         intro="Priced per team member, billed quarterly. Annual upfront available at a 10% discount."
@@ -114,9 +114,9 @@ export default function PricingPage() {
           </Card>
         </div>
 
-        {/* EOR standalone note */}
+        {/* Employment-only note */}
         <p className="mt-6 text-sm text-brand-navy/60">
-          Already have someone in mind? We can act as EOR only — covering contracts, payroll and compliance without
+          Already have someone in mind? We can take on employment only — covering contracts, payroll and compliance without
           the recruitment. Same fee structure applies.
         </p>
       </PageSection>

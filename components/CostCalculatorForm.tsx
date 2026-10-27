@@ -53,7 +53,7 @@ function calcTO(s: State): { total: number; rows: Row[] } {
     total,
     rows: [
       { label: 'Offshore salary', value: mo },
-      { label: `TrustedOps EoR (${fmtAUD(s.to_eorQtrFee)}/qtr)`, value: eorMo },
+      { label: `TrustedOps fee (${fmtAUD(s.to_eorQtrFee)}/qtr)`, value: eorMo },
       { label: '13th month pay', value: thirteenthMonth },
       { label: `Mandatory entitlements (${s.to_mandatoryEntitlements}%)`, value: entitlements },
       { label: 'Equipment', value: s.to_equipment },
@@ -347,7 +347,7 @@ function CostCalculator({ initial }: { initial: State }) {
               </div>
               <div className="text-base font-semibold text-white">TrustedOps</div>
               <div className="mt-0.5 text-[13px] text-white/90">
-                Offshore via Employer of Record — compliance handled for you
+                Offshore with TrustedOps — we employ, supervise and manage
               </div>
             </div>
             <div className="bg-white px-5 pb-5 pt-4">
@@ -362,7 +362,7 @@ function CostCalculator({ initial }: { initial: State }) {
                 />
                 <div>
                   <label className={fieldLabel}>
-                    TrustedOps EoR fee
+                    TrustedOps fee
                   </label>
                   <div className="flex items-center gap-1.5">
                     <input

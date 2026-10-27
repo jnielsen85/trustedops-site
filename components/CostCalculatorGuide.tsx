@@ -5,7 +5,7 @@ const PANELS = [
   },
   {
     pill: 'TrustedOps',
-    body: "Your team member's offshore salary plus a flat quarterly EoR fee — that's it. TrustedOps handles all Philippine payroll, compliance, and statutory obligations. No super. No workers comp. No leave loadings on your books.",
+    body: "Your team member's offshore salary plus a flat quarterly TrustedOps fee — that's it. TrustedOps handles all Philippine payroll, compliance, and statutory obligations. No super. No workers comp. No leave loadings on your books.",
   },
   {
     pill: 'How to use it',
@@ -21,15 +21,15 @@ const PITFALLS = [
 
 const sectionLabel = 'mb-2 text-[11px] font-bold tracking-widest text-brand-navy/70 uppercase';
 
-/** Collapsible "how to use" panel, closed by default so the calculator is never blocked. */
+/** Collapsible "About this calculator" panel, closed by default so the calculator is never blocked. */
 export function CostCalculatorGuide() {
   return (
     <details className="group rounded-3xl border border-black/10 bg-white print:hidden">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 [&::-webkit-details-marker]:hidden">
         <div>
-          <h2 className="text-lg font-bold text-brand-navy">How to use the Cost Calculator</h2>
+          <h2 className="text-lg font-bold text-brand-navy">About this calculator</h2>
           <p className="mt-1 text-sm text-brand-navy/70">
-            Compare true fully-loaded cost: Australian hire vs TrustedOps.
+            What it compares and the costs most comparisons miss.
           </p>
         </div>
         <svg

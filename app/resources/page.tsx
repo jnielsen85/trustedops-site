@@ -13,7 +13,7 @@ const tools = [
     href: "/resources/cost-calculator",
     title: "Fully-Loaded Cost Calculator",
     description:
-      'Compare Direct Hire vs EoR vs BPO — monthly cost, 12-month total, and savings vs local hire. Make "Better Talent Economics" tangible.',
+      'Compare an Australian direct hire with TrustedOps — monthly cost, 12-month total, and savings vs local hire. Make "Better Talent Economics" tangible.',
   },
   {
     href: "/resources/role-scorecard",

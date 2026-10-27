@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   // The root layout's title template appends "— TrustedOps"
   title: 'Fully-Loaded Cost Calculator',
   description:
-    'Compare the true fully-loaded cost of Direct Hire vs Employer of Record (EoR) vs BPO — monthly cost, 12-month total, and savings vs local hire.',
+    'Compare the true fully-loaded cost of an Australian direct hire with a TrustedOps specialist — monthly cost, 12-month total, and savings vs local hire.',
 };
 
 export default function CostCalculatorPage() {
