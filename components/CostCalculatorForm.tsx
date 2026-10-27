@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import { readStored, useHydrated } from '@/lib/stored-form';
 import { ROLE_DATA, INITIAL } from '@/lib/calculator-data';
@@ -71,6 +70,12 @@ const numCls =
   'text-right [appearance:textfield] ' +
   '[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none';
 
+const pillBtn =
+  'cursor-pointer rounded-full border border-black/10 bg-white px-5 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50';
+
+// Small uppercase field label
+const fieldLabel = 'mb-1 block text-[11px] font-semibold tracking-wider uppercase text-brand-navy/70';
+
 // ── NumField ──────────────────────────────────────────────────────────────
 
 function NumField({
@@ -92,9 +97,9 @@ function NumField({
 }) {
   return (
     <div>
-      <label className="mb-1 block text-[10px] font-semibold tracking-wider uppercase text-brand-navy/40">
+      <label className={fieldLabel}>
         {label}
-        {hint && <span className="ml-1 normal-case font-normal text-brand-navy/30">{hint}</span>}
+        {hint && <span className="ml-1 normal-case font-normal text-brand-navy/60">{hint}</span>}
       </label>
       <div className="flex items-center gap-1.5">
         <input
@@ -105,7 +110,7 @@ function NumField({
           step={step}
           min={min}
         />
-        {unit && <span className="w-9 shrink-0 text-xs text-brand-navy/40">{unit}</span>}
+        {unit && <span className="w-12 shrink-0 text-xs text-brand-navy/60">{unit}</span>}
       </div>
     </div>
   );
@@ -128,10 +133,10 @@ function CompBar({
 }) {
   const pct = max > 0 ? Math.max((value / max) * 100, 2) : 2;
   return (
-    <div className="flex items-center gap-3">
-      <div className="w-28 shrink-0">
-        <div className="text-[11px] font-semibold text-brand-navy/70">{label}</div>
-        {sublabel && <div className="text-[10px] text-brand-navy/40">{sublabel}</div>}
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+      <div className="w-full sm:w-28 sm:shrink-0">
+        <div className="text-xs font-semibold text-brand-navy/80">{label}</div>
+        {sublabel && <div className="text-[11px] text-brand-navy/60">{sublabel}</div>}
       </div>
       <div className="flex-1 rounded-full bg-slate-100" style={{ height: 10 }}>
         <div
@@ -202,49 +207,23 @@ function CostCalculator({ initial }: { initial: State }) {
   const barMax = Math.max(au.total, to.total);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-soft">
+    <div>
 
-      {/* ── Header ──────────────────────────────────────────────────────── */}
-      <div className="flex flex-wrap items-center gap-4 border-b-4 border-brand-teal px-6 py-5">
-        <Image
-          src="/brand/trustedops_logo_horizontal_lockup_color.svg"
-          alt="TrustedOps"
-          width={176}
-          height={44}
-          className="h-11 w-auto"
-          priority
-        />
-        <div className="flex-1">
-          <h1 className="text-xl font-semibold tracking-tight text-brand-navy">
-            Fully-Loaded Cost Calculator
-          </h1>
-          <p className="mt-1 text-[13px] text-brand-navy/50">
-            Australian Direct Hire vs TrustedOps — true cost, not just base salary.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2.5">
-          <button
-            type="button"
-            onClick={handleSave}
-            className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-          >
-            {savedMsg ? 'Saved!' : 'Save'}
-          </button>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-          >
-            Reset
-          </button>
-        </div>
+      {/* ── Toolbar ─────────────────────────────────────────────────────── */}
+      <div className="mb-5 flex justify-end gap-2.5">
+        <button type="button" onClick={handleSave} className={pillBtn}>
+          {savedMsg ? 'Saved!' : 'Save'}
+        </button>
+        <button type="button" onClick={handleReset} className={pillBtn}>
+          Reset
+        </button>
       </div>
 
-      <div className="px-6 pb-8 pt-6">
+      <div>
 
         {/* ── Role Selector ────────────────────────────────────────────── */}
-        <div className="rounded-xl border border-brand-teal/20 bg-brand-teal/5 p-5">
-          <label className="mb-2 block text-[11px] font-bold tracking-widest uppercase text-brand-teal">
+        <div className="rounded-2xl border border-brand-teal/30 bg-white p-5">
+          <label className="mb-2 block text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
             Select a role
           </label>
           <select
@@ -265,7 +244,7 @@ function CostCalculator({ initial }: { initial: State }) {
               </optgroup>
             ))}
           </select>
-          <p className="mt-2 text-[11px] text-brand-teal/70">
+          <p className="mt-2 text-xs text-brand-navy/70">
             Salary benchmarks auto-fill from our AU vs Philippines data. You can override any figure below.
           </p>
         </div>
@@ -274,18 +253,18 @@ function CostCalculator({ initial }: { initial: State }) {
         <div className="mt-5 grid gap-5 lg:grid-cols-2">
 
           {/* Australian Direct Hire */}
-          <div className="overflow-hidden rounded-2xl border border-brand-navy/15">
+          <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white">
             <div className="bg-brand-navy px-5 py-4">
-              <div className="text-[10px] font-bold tracking-widest uppercase text-white/50">
+              <div className="text-[11px] font-bold tracking-widest uppercase text-white/80">
                 Option A
               </div>
               <div className="text-base font-semibold text-white">Australian Direct Hire</div>
-              <div className="mt-0.5 text-[12px] text-white/50">
+              <div className="mt-0.5 text-[13px] text-white/90">
                 You hire locally and own all employer obligations
               </div>
             </div>
             <div className="bg-white px-5 pb-5 pt-4">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+              <div className="grid gap-x-4 gap-y-3 sm:grid-cols-2">
                 <NumField
                   label="Annual salary"
                   value={s.au_salary}
@@ -327,7 +306,7 @@ function CostCalculator({ initial }: { initial: State }) {
                   onChange={n('au_software')}
                   unit="$/mo"
                 />
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <NumField
                     label="Payroll & HR admin"
                     value={s.au_payrollAdmin}
@@ -339,7 +318,7 @@ function CostCalculator({ initial }: { initial: State }) {
               </div>
               {/* AU Total */}
               <div className="mt-4 flex items-center justify-between rounded-xl bg-brand-navy/5 px-4 py-3">
-                <div className="text-sm font-semibold text-brand-navy/70">
+                <div className="text-sm font-semibold text-brand-navy/80">
                   Fully-loaded monthly cost
                 </div>
                 <div className="text-2xl font-bold tracking-tight text-brand-navy">
@@ -350,8 +329,8 @@ function CostCalculator({ initial }: { initial: State }) {
               <div className="mt-3 space-y-1 border-t border-slate-100 pt-3">
                 {au.rows.map((r) => (
                   <div key={r.label} className="flex justify-between gap-2">
-                    <span className="truncate text-[11px] text-brand-navy/40">{r.label}</span>
-                    <span className="shrink-0 text-[11px] font-medium text-brand-navy/60">
+                    <span className="truncate text-xs text-brand-navy/70">{r.label}</span>
+                    <span className="shrink-0 text-xs font-medium text-brand-navy/80">
                       {fmtAUD(r.value)}
                     </span>
                   </div>
@@ -361,18 +340,18 @@ function CostCalculator({ initial }: { initial: State }) {
           </div>
 
           {/* TrustedOps */}
-          <div className="overflow-hidden rounded-2xl border border-brand-teal/25">
+          <div className="overflow-hidden rounded-2xl border border-brand-teal/25 bg-white">
             <div className="bg-brand-teal px-5 py-4">
-              <div className="text-[10px] font-bold tracking-widest uppercase text-white/50">
+              <div className="text-[11px] font-bold tracking-widest uppercase text-white/80">
                 Option B
               </div>
               <div className="text-base font-semibold text-white">TrustedOps</div>
-              <div className="mt-0.5 text-[12px] text-white/50">
+              <div className="mt-0.5 text-[13px] text-white/90">
                 Offshore via Employer of Record — compliance handled for you
               </div>
             </div>
             <div className="bg-white px-5 pb-5 pt-4">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+              <div className="grid gap-x-4 gap-y-3 sm:grid-cols-2">
                 <NumField
                   label="Offshore salary"
                   value={s.to_salary}
@@ -382,7 +361,7 @@ function CostCalculator({ initial }: { initial: State }) {
                   min={1}
                 />
                 <div>
-                  <label className="mb-1 block text-[10px] font-semibold tracking-wider uppercase text-brand-navy/40">
+                  <label className={fieldLabel}>
                     TrustedOps EoR fee
                   </label>
                   <div className="flex items-center gap-1.5">
@@ -394,9 +373,9 @@ function CostCalculator({ initial }: { initial: State }) {
                       min={0}
                       step={100}
                     />
-                    <span className="w-9 shrink-0 text-xs text-brand-navy/40">/qtr</span>
+                    <span className="w-12 shrink-0 text-xs text-brand-navy/60">/qtr</span>
                   </div>
-                  <div className="mt-1 text-[10px] text-brand-teal/70">
+                  <div className="mt-1 text-[11px] text-brand-navy/70">
                     {fmtAUD(s.to_eorQtrFee / 3)}/mo equiv.
                     &nbsp;·&nbsp;covers all PH compliance
                   </div>
@@ -404,29 +383,29 @@ function CostCalculator({ initial }: { initial: State }) {
 
                 {/* 13th Month Pay — read-only, auto-calculated */}
                 <div>
-                  <label className="mb-1 block text-[10px] font-semibold tracking-wider uppercase text-brand-navy/40">
+                  <label className={fieldLabel}>
                     13th Month Pay{' '}
-                    <span className="normal-case font-normal text-brand-navy/30">(mandatory, fixed)</span>
+                    <span className="normal-case font-normal text-brand-navy/60">(mandatory, fixed)</span>
                   </label>
                   <div className="flex items-center gap-1.5">
                     <div className="flex w-full items-center justify-between rounded-lg border border-gray-100 bg-slate-50 px-2.5 py-1.5">
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-navy/30">
+                      <span className="text-[11px] font-semibold uppercase tracking-wide text-brand-navy/60">
                         auto
                       </span>
-                      <span className="text-sm font-semibold text-brand-navy/50">
+                      <span className="text-sm font-semibold text-brand-navy/80">
                         {fmtAUD(s.to_salary / 144)}
                       </span>
                     </div>
-                    <span className="w-9 shrink-0 text-xs text-brand-navy/40">/mo</span>
+                    <span className="w-12 shrink-0 text-xs text-brand-navy/60">/mo</span>
                   </div>
-                  <div className="mt-1 text-[10px] text-brand-navy/30">
+                  <div className="mt-1 text-[11px] text-brand-navy/70">
                     = {fmtAUD(s.to_salary / 12)} paid annually (1 month&apos;s salary)
                   </div>
                 </div>
 
                 {/* Mandatory Entitlements — editable with asterisk */}
                 <div>
-                  <label className="mb-1 block text-[10px] font-semibold tracking-wider uppercase text-brand-navy/40">
+                  <label className={fieldLabel}>
                     Mandatory entitlements
                     <span className="ml-0.5 text-brand-teal">*</span>
                   </label>
@@ -439,9 +418,9 @@ function CostCalculator({ initial }: { initial: State }) {
                       min={0}
                       step={0.5}
                     />
-                    <span className="w-9 shrink-0 text-xs text-brand-navy/40">%</span>
+                    <span className="w-12 shrink-0 text-xs text-brand-navy/60">%</span>
                   </div>
-                  <div className="mt-1 text-[10px] text-brand-navy/30">
+                  <div className="mt-1 text-[11px] text-brand-navy/70">
                     of monthly salary · {fmtAUD((s.to_salary / 12) * (s.to_mandatoryEntitlements || 0) / 100)}/mo
                   </div>
                 </div>
@@ -474,8 +453,8 @@ function CostCalculator({ initial }: { initial: State }) {
               <div className="mt-3 space-y-1 border-t border-slate-100 pt-3">
                 {to.rows.map((r) => (
                   <div key={r.label} className="flex justify-between gap-2">
-                    <span className="truncate text-[11px] text-brand-navy/40">{r.label}</span>
-                    <span className="shrink-0 text-[11px] font-medium text-brand-navy/60">
+                    <span className="truncate text-xs text-brand-navy/70">{r.label}</span>
+                    <span className="shrink-0 text-xs font-medium text-brand-navy/80">
                       {fmtAUD(r.value)}
                     </span>
                   </div>
@@ -484,7 +463,7 @@ function CostCalculator({ initial }: { initial: State }) {
 
               {/* Mandatory entitlements footnote */}
               <div className="mt-3 rounded-lg border border-brand-teal/15 bg-brand-teal/5 px-3 py-2.5">
-                <p className="text-[11px] leading-relaxed text-brand-navy/50">
+                <p className="text-xs leading-relaxed text-brand-navy/70">
                   <span className="font-semibold text-brand-teal">*</span> Mandatory entitlements
                   typically include: SSS employer contribution, PhilHealth employer contribution,
                   Pag-IBIG employer contribution, and standard allowances (internet / WFH).
@@ -492,7 +471,7 @@ function CostCalculator({ initial }: { initial: State }) {
                 </p>
               </div>
 
-              <p className="mt-2.5 text-[11px] text-brand-navy/30">
+              <p className="mt-2.5 text-xs text-brand-navy/70">
                 No Australian superannuation, workers comp, or leave entitlements payable.
               </p>
             </div>
@@ -503,36 +482,36 @@ function CostCalculator({ initial }: { initial: State }) {
         <div className="mt-6 space-y-4">
 
           {/* Hero savings card */}
-          <div className="rounded-2xl border border-brand-teal/20 bg-gradient-to-br from-brand-teal/8 to-brand-navy/5 px-6 py-6" style={{ background: 'linear-gradient(135deg, rgb(17 150 204 / 0.07) 0%, rgb(11 27 58 / 0.04) 100%)' }}>
+          <div className="rounded-2xl border border-brand-teal/30 bg-white px-6 py-6">
             <div className="flex flex-col items-center gap-1 text-center sm:flex-row sm:justify-between sm:text-left">
               <div>
-                <div className="text-[11px] font-bold tracking-widest uppercase text-brand-navy/40">
+                <div className="text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
                   Your estimated savings with TrustedOps
                 </div>
                 <div className="mt-1 text-4xl font-bold tracking-tight text-brand-teal">
                   {fmtAUD(annualSaving > 0 ? annualSaving : 0)}
-                  <span className="ml-2 text-lg font-semibold text-brand-navy/40">/ year</span>
+                  <span className="ml-2 text-lg font-semibold text-brand-navy/60">/ year</span>
                 </div>
-                <div className="mt-1 text-sm text-brand-navy/50">
+                <div className="mt-1 text-sm text-brand-navy/70">
                   {fmtAUD(monthlySaving > 0 ? monthlySaving : 0)}/mo savings&nbsp;&nbsp;·&nbsp;&nbsp;
-                  TrustedOps costs <span className="font-semibold text-brand-navy/70">{pctOfAU}%</span> of an equivalent AU hire
+                  TrustedOps costs <span className="font-semibold text-brand-navy">{pctOfAU}%</span> of an equivalent AU hire
                 </div>
               </div>
               <div className="shrink-0 rounded-xl border border-brand-teal/20 bg-white px-5 py-3 text-center">
-                <div className="text-[10px] font-bold tracking-widest uppercase text-brand-navy/40">
+                <div className="text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
                   3-year projection
                 </div>
                 <div className="mt-0.5 text-2xl font-bold text-brand-navy">
                   {fmtAUD(annualSaving > 0 ? annualSaving * 3 : 0)}
                 </div>
-                <div className="text-[11px] text-brand-navy/40">total savings</div>
+                <div className="text-xs text-brand-navy/70">total savings</div>
               </div>
             </div>
           </div>
 
           {/* Comparison bars */}
           <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
-            <p className="mb-4 text-[10px] font-bold tracking-widest uppercase text-brand-navy/40">
+            <p className="mb-4 text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
               Monthly cost comparison
             </p>
             <div className="space-y-3">
@@ -554,13 +533,13 @@ function CostCalculator({ initial }: { initial: State }) {
             {/* 12-month row */}
             <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
               <div className="rounded-lg bg-brand-navy/5 px-3 py-2.5 text-center">
-                <div className="text-[10px] font-bold tracking-widest uppercase text-brand-navy/40">
+                <div className="text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
                   AU Hire · 12 months
                 </div>
                 <div className="mt-0.5 text-lg font-bold text-brand-navy">{fmtAUD(au.total * 12)}</div>
               </div>
               <div className="rounded-lg px-3 py-2.5 text-center" style={{ backgroundColor: 'rgb(17 150 204 / 0.07)' }}>
-                <div className="text-[10px] font-bold tracking-widest uppercase text-brand-teal/60">
+                <div className="text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
                   TrustedOps · 12 months
                 </div>
                 <div className="mt-0.5 text-lg font-bold text-brand-teal">{fmtAUD(to.total * 12)}</div>
@@ -569,13 +548,24 @@ function CostCalculator({ initial }: { initial: State }) {
           </div>
 
           {/* Did You Know callout */}
-          <div className="flex gap-3.5 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4">
-            <div className="mt-0.5 shrink-0 text-lg">💡</div>
+          <div className="flex gap-3.5 rounded-2xl border border-brand-teal/30 bg-white px-5 py-4">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z" />
+            </svg>
             <div>
-              <div className="mb-1 text-[10px] font-bold tracking-widest uppercase text-amber-700">
+              <div className="mb-1 text-[11px] font-bold tracking-widest uppercase text-brand-navy/70">
                 Did you know?
               </div>
-              <p className="text-[13px] leading-relaxed text-amber-900">
+              <p className="text-sm leading-relaxed text-brand-navy/80">
                 The <span className="font-semibold">Australian HR Institute</span> puts the average cost
                 to hire at{' '}
                 <span className="font-semibold">A$23,860 per candidate</span>, with an average
@@ -585,7 +575,7 @@ function CostCalculator({ initial }: { initial: State }) {
             </div>
           </div>
 
-          <p className="text-[10px] leading-relaxed text-brand-navy/30">
+          <p className="text-xs leading-relaxed text-brand-navy/60">
             All figures in AUD. Salary benchmarks are indicative. Australian on-costs (super, workers comp,
             leave) may vary by state, industry, and award. Consult your accountant or HR advisor for precise figures.
           </p>

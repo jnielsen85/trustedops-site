@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Container } from '@/components/Container';
 import { CostCalculatorGuide } from '@/components/CostCalculatorGuide';
 import { CostCalculatorForm } from '@/components/CostCalculatorForm';
+import { PageHero } from '@/components/PageHero';
+import { PageSection } from '@/components/PageSection';
 
 export const metadata: Metadata = {
-  title: 'Fully-Loaded Cost Calculator | TrustedOps Resources',
+  // The root layout's title template appends "— TrustedOps"
+  title: 'Fully-Loaded Cost Calculator',
   description:
     'Compare the true fully-loaded cost of Direct Hire vs Employer of Record (EoR) vs BPO — monthly cost, 12-month total, and savings vs local hire.',
 };
@@ -13,18 +15,25 @@ export const metadata: Metadata = {
 export default function CostCalculatorPage() {
   return (
     <>
-      <CostCalculatorGuide />
-      <Container className="py-10">
-        <Link
-          href="/resources"
-          className="text-sm font-semibold text-brand-navy/70 hover:text-brand-navy"
-        >
-          ← Back to resources
-        </Link>
-        <div className="mt-6">
+      <PageHero
+        kicker={
+          <Link href="/resources" className="text-sm font-semibold text-brand-navy/70 hover:text-brand-navy">
+            ← Back to resources
+          </Link>
+        }
+        title="Fully-Loaded Cost Calculator"
+      >
+        <p className="mt-3 text-lg text-brand-navy/70">
+          Australian Direct Hire vs TrustedOps — true cost, not just base salary.
+        </p>
+      </PageHero>
+
+      <PageSection tone="grey">
+        <CostCalculatorGuide />
+        <div className="mt-5">
           <CostCalculatorForm />
         </div>
-      </Container>
+      </PageSection>
     </>
   );
 }

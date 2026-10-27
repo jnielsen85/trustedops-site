@@ -1,8 +1,3 @@
-'use client';
-
-import Image from 'next/image';
-import { useState } from 'react';
-
 const PANELS = [
   {
     pill: 'Australian Direct Hire',
@@ -24,91 +19,63 @@ const PITFALLS = [
   'Assuming offshore = lower quality — when properly recruited and managed, offshore team members perform at equivalent levels.',
 ];
 
+const sectionLabel = 'mb-2 text-[11px] font-bold tracking-widest text-brand-navy/70 uppercase';
+
+/** Collapsible "how to use" panel, closed by default so the calculator is never blocked. */
 export function CostCalculatorGuide() {
-  const [visible, setVisible] = useState(true);
-
-  if (!visible) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-navy/50 p-4 backdrop-blur-sm print:hidden">
-      <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto overscroll-contain rounded-2xl border border-gray-200 bg-white shadow-[0_20px_60px_rgba(11,27,58,0.18)]">
+    <details className="group rounded-3xl border border-black/10 bg-white print:hidden">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 [&::-webkit-details-marker]:hidden">
+        <div>
+          <h2 className="text-lg font-bold text-brand-navy">How to use the Cost Calculator</h2>
+          <p className="mt-1 text-sm text-brand-navy/70">
+            Compare true fully-loaded cost: Australian hire vs TrustedOps.
+          </p>
+        </div>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 20 20"
+          className="h-5 w-5 shrink-0 text-brand-teal transition-transform group-open:rotate-180"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 8l5 5 5-5" />
+        </svg>
+      </summary>
 
-        {/* Header */}
-        <div className="flex flex-wrap items-center gap-4 border-b-4 border-brand-teal px-6 py-5">
-          <Image
-            src="/brand/trustedops_logo_horizontal_lockup_color.svg"
-            alt="TrustedOps"
-            width={176}
-            height={44}
-            className="h-11 w-auto"
-            priority
-          />
-          <div>
-            <div className="text-[11px] font-bold tracking-widest text-brand-teal uppercase">
-              TrustedOps
+      <div className="border-t border-black/10 px-6 pb-6 pt-5">
+        <h3 className={sectionLabel}>What this tool does</h3>
+        <p className="max-w-prose text-[15px] leading-relaxed text-brand-navy/70">
+          Most hiring comparisons use base salary. This calculator shows the full picture — superannuation,
+          workers compensation, leave entitlements, equipment, and admin — so you can see the real
+          difference between hiring locally in Australia and building your team through TrustedOps.
+        </p>
+
+        {/* Three panels */}
+        <div className="mt-5 grid gap-3.5 md:grid-cols-3">
+          {PANELS.map(({ pill, body }) => (
+            <div key={pill} className="rounded-2xl border border-black/10 p-4">
+              <div className="mb-2.5 inline-flex items-center rounded-full border border-brand-teal/25 bg-brand-teal/5 px-2.5 py-1 text-[11px] font-bold tracking-wide text-brand-navy uppercase">
+                {pill}
+              </div>
+              <p className="text-sm leading-relaxed text-brand-navy/70">{body}</p>
             </div>
-            <h2 className="text-xl font-semibold tracking-tight text-brand-navy">
-              How to use the Cost Calculator
-            </h2>
-            <p className="mt-0.5 text-[13px] text-brand-navy/50">
-              Compare true fully-loaded cost: Australian hire vs TrustedOps.
-            </p>
-          </div>
+          ))}
         </div>
 
-        {/* Body */}
-        <div className="px-6 py-6">
-
-          <h3 className="mb-2 text-[11px] font-bold tracking-widest text-brand-navy/40 uppercase">
-            What this tool does
-          </h3>
-          <p className="max-w-prose text-[15px] leading-relaxed text-brand-navy/70">
-            Most hiring comparisons use base salary. This calculator shows the full picture — superannuation,
-            workers compensation, leave entitlements, equipment, and admin — so you can see the real
-            difference between hiring locally in Australia and building your team through TrustedOps.
-          </p>
-
-          {/* Three panels */}
-          <div className="mt-5 grid gap-3.5 md:grid-cols-3">
-            {PANELS.map(({ pill, body }) => (
-              <div key={pill} className="rounded-xl border border-gray-200 p-4">
-                <div className="mb-2.5 inline-flex items-center rounded-full border border-brand-teal/25 bg-brand-teal/5 px-2.5 py-1 text-[11px] font-bold tracking-wide text-brand-navy uppercase">
-                  {pill}
-                </div>
-                <p className="text-[13px] leading-relaxed text-brand-navy/60">{body}</p>
-              </div>
+        {/* Pitfalls */}
+        <div className="mt-5 border-t border-black/10 pt-5">
+          <h3 className={sectionLabel}>Common calculation mistakes</h3>
+          <ul className="list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-brand-navy/70">
+            {PITFALLS.map((p) => (
+              <li key={p}>{p}</li>
             ))}
-          </div>
-
-          {/* Pitfalls */}
-          <div className="mt-5 border-t border-slate-100 pt-5">
-            <h3 className="mb-2 text-[11px] font-bold tracking-widest text-brand-navy/40 uppercase">
-              Common calculation mistakes
-            </h3>
-            <ul className="list-disc space-y-1.5 pl-4 text-[13px] leading-relaxed text-brand-navy/60">
-              {PITFALLS.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Footer / CTA */}
-          <div className="mt-6 flex flex-col gap-4 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[12px] text-brand-navy/40">
-              <span className="font-semibold text-brand-navy/60">TrustedOps</span>
-              {' '}– Better Talent Economics&nbsp;&nbsp;·&nbsp;&nbsp;Cost Calculator v2.0
-            </p>
-            <button
-              type="button"
-              onClick={() => setVisible(false)}
-              className="shrink-0 cursor-pointer rounded-xl bg-brand-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
-            >
-              Open the Calculator →
-            </button>
-          </div>
-
+          </ul>
         </div>
       </div>
-    </div>
+    </details>
   );
 }
