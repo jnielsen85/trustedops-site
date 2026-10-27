@@ -48,7 +48,11 @@ export async function getAllResources(): Promise<Resource[]> {
   return items.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 }
 
+/** Returns null when no article has this slug. */
 export async function getResourceBySlug(slug: string) {
+  // Only load slugs that exist on disk, so a URL can never reach an arbitrary path
+  if (!(await getAllResourceSlugs()).includes(slug)) return null;
+
   const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
   const raw = await fs.readFile(filePath, "utf8");
   const { data, content } = matter(raw);

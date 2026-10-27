@@ -1,54 +1,12 @@
-import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Logo } from "@/components/Logo";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-black/5 bg-white">
-      <Container className="py-12">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-          <div className="max-w-sm">
-            <Logo />
-            <p className="mt-3 text-sm text-brand-navy/70">
-              TrustedOps — Better Talent Economics.
-            </p>
-            <p className="mt-3 text-sm text-brand-navy/60">
-              We help Australian businesses hire and manage offshore team members in the Philippines — with the operational support to make it work.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-8 text-sm md:grid-cols-3">
-            <div className="space-y-3">
-              <div className="font-semibold">Company</div>
-              <ul className="space-y-2 text-brand-navy/70">
-                <li><Link href="/how-it-works" className="hover:text-brand-navy">What we do</Link></li>
-                <li><Link href="/services" className="hover:text-brand-navy">Roles</Link></li>
-                <li><Link href="/pricing" className="hover:text-brand-navy">Pricing</Link></li>
-              </ul>
-            </div>
-
-            <div className="space-y-3">
-              <div className="font-semibold">Resources</div>
-              <ul className="space-y-2 text-brand-navy/70">
-                <li><Link href="/resources" className="hover:text-brand-navy">Articles</Link></li>
-                <li><Link href="/contact" className="hover:text-brand-navy">Contact Us</Link></li>
-              </ul>
-            </div>
-
-            <div className="space-y-3">
-              <div className="font-semibold">Legal</div>
-              <ul className="space-y-2 text-brand-navy/70">
-                <li><span className="opacity-70">Privacy (TBD)</span></li>
-                <li><span className="opacity-70">Terms (TBD)</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-10 flex flex-col gap-2 border-t border-black/5 pt-6 text-xs text-brand-navy/60 md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} TrustedOps. All rights reserved.</div>
-          <div>Built with Next.js + Tailwind.</div>
-        </div>
+      <Container className="flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between">
+        <Logo />
+        <div className="text-xs text-brand-navy/60">© {new Date().getFullYear()} TrustedOps. All rights reserved.</div>
       </Container>
     </footer>
   );

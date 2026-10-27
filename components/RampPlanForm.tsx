@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { RampPlanGuide } from './RampPlanGuide';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
+import { readStored, useHydrated } from '@/lib/stored-form';
 
 const STORAGE_KEY = 'trustedops_ramp_plan_v1';
 
@@ -89,8 +90,8 @@ const INITIAL: FormData = {
 // ─── Style constants ──────────────────────────────────────────────────────────
 
 const inputCls =
-  'w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm text-brand-navy ' +
-  'placeholder:text-brand-navy/25 outline-none focus:border-brand-teal ' +
+  'w-full border border-black/10 rounded-xl px-3 py-2.5 text-sm text-brand-navy ' +
+  'placeholder:text-brand-navy/40 outline-none focus:border-brand-teal ' +
   'focus:ring-2 focus:ring-brand-teal/10 transition';
 
 const textareaCls = inputCls + ' min-h-[88px] resize-y';
@@ -99,6 +100,12 @@ const tableInputCls =
   'w-full border border-gray-200 rounded-lg px-2.5 py-2 text-sm text-brand-navy ' +
   'placeholder:text-brand-navy/20 outline-none focus:border-brand-teal ' +
   'focus:ring-1 focus:ring-brand-teal/10 transition';
+
+const pillBtn =
+  'cursor-pointer rounded-full border border-black/10 bg-white px-5 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50';
+
+const printBtn =
+  'cursor-pointer rounded-full bg-brand-navy px-5 py-2 text-sm font-semibold text-white transition hover:opacity-90';
 
 const grid = 'grid grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-x-4';
 
@@ -115,7 +122,7 @@ function Field({
 }) {
   return (
     <div className={full ? 'md:col-span-2' : ''}>
-      <label className="mb-1.5 block text-[11px] font-bold tracking-wider uppercase text-brand-navy/50">
+      <label className="mb-1.5 block text-[11px] font-bold tracking-wider uppercase text-brand-navy/70">
         {label}
       </label>
       {children}
@@ -133,9 +140,9 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mt-5 border-t border-slate-100 pt-5">
+    <div className="mt-5 border-t border-black/10 pt-5">
       <h2 className="mb-3 text-sm font-semibold text-brand-navy">{title}</h2>
-      {hint && <p className="mb-3.5 text-[13px] text-brand-navy/50">{hint}</p>}
+      {hint && <p className="mb-3.5 text-sm text-brand-navy/70">{hint}</p>}
       {children}
     </div>
   );
@@ -144,18 +151,19 @@ function FormSection({
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function RampPlanForm() {
-  const [showGuide, setShowGuide] = useState(true);
-  const [data, setData] = useState<FormData>(INITIAL);
-  const [savedMsg, setSavedMsg] = useState(false);
+  // Server and hydration render the defaults; once hydrated, remount with any saved progress.
+  const hydrated = useHydrated();
+  return (
+    <RampPlan
+      key={hydrated ? 'stored' : 'initial'}
+      initial={hydrated ? readStored(STORAGE_KEY, INITIAL) : INITIAL}
+    />
+  );
+}
 
-  useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
-      if (stored) setData({ ...INITIAL, ...stored });
-    } catch {
-      // ignore corrupt data
-    }
-  }, []);
+function RampPlan({ initial }: { initial: FormData }) {
+  const [data, setData] = useState<FormData>(initial);
+  const [savedMsg, setSavedMsg] = useState(false);
 
   // Generic string field setter
   const set = (key: string) =>
@@ -240,58 +248,29 @@ export function RampPlanForm() {
 
   return (
     <>
-      {showGuide && <RampPlanGuide onClose={() => setShowGuide(false)} />}
+      {/* ── Toolbar ── */}
+      <div className="mb-5 flex flex-wrap justify-end gap-2.5 print:hidden">
+        <button type="button" onClick={handleSave} className={pillBtn}>
+          {savedMsg ? 'Saved!' : 'Save'}
+        </button>
+        <button type="button" onClick={handleClear} className={pillBtn}>
+          Clear
+        </button>
+        <button type="button" onClick={() => window.print()} className={printBtn}>
+          Print
+        </button>
+      </div>
 
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-soft">
-
-        {/* Header */}
-        <div className="flex flex-wrap items-center gap-4 border-b-4 border-brand-teal px-6 py-5">
+      <div className="rounded-3xl border border-black/10 bg-white print:rounded-none print:border-0">
+        {/* Print-only header: the site header is hidden when printing, so this brands the page */}
+        <div className="hidden items-center gap-4 border-b-4 border-brand-teal px-6 py-5 print:flex">
           <Image
             src="/brand/trustedops_logo_horizontal_lockup_color.svg"
             alt="TrustedOps"
-            width={176}
+            width={264}
             height={44}
-            className="h-11 w-auto"
-            priority
           />
-          <div className="flex-1">
-            <h1 className="text-xl font-semibold tracking-tight text-brand-navy">
-              30/60/90 Ramp Plan
-            </h1>
-            <p className="mt-1 text-[13px] text-brand-navy/50 print:hidden">
-              Fill in the plan, then print or save as PDF.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2.5 print:hidden">
-            <button
-              type="button"
-              onClick={() => setShowGuide(true)}
-              className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-            >
-              How to use
-            </button>
-            <button
-              type="button"
-              onClick={handleSave}
-              className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-            >
-              {savedMsg ? 'Saved!' : 'Save'}
-            </button>
-            <button
-              type="button"
-              onClick={handleClear}
-              className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-brand-navy transition hover:bg-slate-50"
-            >
-              Clear
-            </button>
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="cursor-pointer rounded-xl border border-brand-navy bg-brand-navy px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
-            >
-              Print
-            </button>
-          </div>
+          <div className="text-xl font-semibold tracking-tight text-brand-navy">30/60/90 Ramp Plan</div>
         </div>
 
         <form className="px-6 pb-8 pt-5" onSubmit={(e) => e.preventDefault()}>
@@ -311,7 +290,7 @@ export function RampPlanForm() {
               <input type="date" className={inputCls} value={data.startDate} onChange={set('startDate')} />
             </Field>
             <Field label="Location / Timezone & Overlap">
-              <input className={inputCls} placeholder="e.g., PH; 4 hrs overlap with AEST" value={data.timezoneOverlap} onChange={set('timezoneOverlap')} />
+              <input className={inputCls} placeholder="e.g., Manila, working AEST hours" value={data.timezoneOverlap} onChange={set('timezoneOverlap')} />
             </Field>
             <Field label="Manager / Lead">
               <input className={inputCls} placeholder="e.g., Head of Operations" value={data.manager} onChange={set('manager')} />
@@ -333,13 +312,13 @@ export function RampPlanForm() {
             </Field>
 
             <div className="mt-3.5">
-              <div className="mb-2 text-[11px] font-bold tracking-wider uppercase text-brand-navy/50">
+              <div className="mb-2 text-[11px] font-bold tracking-wider uppercase text-brand-navy/70">
                 Top Responsibilities (keep to 5–7)
               </div>
               <div className="space-y-2">
                 {data.resp.map((val, i) => (
                   <div key={i} className="flex items-center gap-2.5">
-                    <span className="w-5 shrink-0 text-right text-[11px] font-bold text-brand-navy/30">
+                    <span className="w-5 shrink-0 text-right text-[11px] font-bold text-brand-navy/60">
                       {i + 1}
                     </span>
                     <input className={inputCls} value={val} onChange={setResp(i)} />
@@ -380,7 +359,7 @@ export function RampPlanForm() {
                     {['Stakeholder / Team', 'Why / Handoff', 'Cadence'].map((h) => (
                       <th
                         key={h}
-                        className="pb-2 pr-2 text-left text-[11px] font-bold tracking-wider uppercase text-brand-navy/50 last:pr-0"
+                        className="pb-2 pr-2 text-left text-[11px] font-bold tracking-wider uppercase text-brand-navy/70 last:pr-0"
                       >
                         {h}
                       </th>
@@ -426,7 +405,7 @@ export function RampPlanForm() {
                       (h) => (
                         <th
                           key={h}
-                          className="pb-2 pr-2 text-left text-[11px] font-bold tracking-wider uppercase text-brand-navy/50 last:pr-0"
+                          className="pb-2 pr-2 text-left text-[11px] font-bold tracking-wider uppercase text-brand-navy/70 last:pr-0"
                         >
                           {h}
                         </th>
@@ -459,7 +438,7 @@ export function RampPlanForm() {
 
           {/* ── 5. Enablement ───────────────────────────────────────────── */}
           <FormSection title="Enablement (Access & Training)">
-            <div className="mb-2 text-[11px] font-bold tracking-wider uppercase text-brand-navy/50">
+            <div className="mb-2 text-[11px] font-bold tracking-wider uppercase text-brand-navy/70">
               Systems / Access Required
             </div>
             <div className="space-y-2.5">
@@ -472,7 +451,7 @@ export function RampPlanForm() {
                     onChange={setCheck(key)}
                     className="h-4 w-4 shrink-0 rounded border-gray-300 accent-[#1196CC]"
                   />
-                  <label htmlFor={key} className="w-52 shrink-0 text-sm text-brand-navy/70">
+                  <label htmlFor={key} className="w-32 shrink-0 text-sm text-brand-navy/70 sm:w-52">
                     {label}
                   </label>
                   <input
@@ -487,7 +466,7 @@ export function RampPlanForm() {
               <div className="flex items-center gap-3">
                 <div className="h-4 w-4 shrink-0" />
                 <input
-                  className={`${inputCls} w-52 shrink-0`}
+                  className={cn(inputCls, 'w-32 shrink-0 sm:w-52')}
                   placeholder="Other access"
                   value={data.access_other}
                   onChange={set('access_other')}
@@ -528,7 +507,7 @@ export function RampPlanForm() {
                 <div key={prefix} className="rounded-xl border border-gray-200 p-4">
                   <div className="mb-3 flex flex-wrap items-baseline gap-2">
                     <h3 className="text-sm font-semibold text-brand-navy">{legend}</h3>
-                    <span className="text-[12px] text-brand-navy/40">{note}</span>
+                    <span className="text-xs text-brand-navy/60">{note}</span>
                   </div>
                   <div className={grid}>
                     <Field label="Learning goals">
