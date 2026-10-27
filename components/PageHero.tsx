@@ -72,7 +72,9 @@ export function PageHero({
 
       {/* Below lg: the photo sits under the text as a full-width strip, so it never
           competes with the copy */}
-      {image ? <div className="relative h-64 sm:h-80 lg:hidden">{photo("100vw")}</div> : null}
+      {image ? (
+        <div className="relative h-64 sm:h-80 lg:hidden">{photo("(min-width: 1024px) 0px, 100vw")}</div>
+      ) : null}
     </section>
   );
 }

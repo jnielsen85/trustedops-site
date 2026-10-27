@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Comparison } from "@/components/Comparison";
 import { CtaBand } from "@/components/CtaBand";
 import { HowItWorks } from "@/components/HowItWorks";
 import { TheProblem } from "@/components/TheProblem";
@@ -48,6 +49,7 @@ export default function HomePage() {
       <TheProblem />
       <TheSolution />
       <HowItWorks />
+      <Comparison />
       <CtaBand secondary={{ label: "Cost Calculator", href: "/resources/cost-calculator" }} />
     </>
   );
