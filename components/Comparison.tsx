@@ -63,7 +63,7 @@ const rows: Row[] = [
     label: "Choosing who you get",
     cells: {
       local: { value: "You run the recruitment" },
-      contractor: { value: "Pick from profiles and hope" },
+      contractor: { value: "Whoever's available, when they're available" },
       trustedops: { value: "Interview up to 3 pre-vetted candidates and approve who's assigned" },
     },
   },
