@@ -11,7 +11,7 @@ const SAVINGS = "$30,000+";
 
 const CALCULATOR_HREF = "/resources/cost-calculator";
 
-type OptionKey = "local" | "freelancer" | "trustedops";
+type OptionKey = "local" | "contractor" | "trustedops";
 
 type Cell = { value: string; sub?: string };
 
@@ -19,12 +19,12 @@ type Row = { label: string; cells: Record<OptionKey, Cell> };
 
 const options: { key: OptionKey; label: string }[] = [
   { key: "local", label: "Hiring locally" },
-  { key: "freelancer", label: "Freelancer / VA platform" },
+  { key: "contractor", label: "Contractor" },
   { key: "trustedops", label: "TrustedOps" },
 ];
 
 // Stacked cards on mobile lead with TrustedOps
-const mobileOrder: OptionKey[] = ["trustedops", "local", "freelancer"];
+const mobileOrder: OptionKey[] = ["trustedops", "local", "contractor"];
 
 const rows: Row[] = [
   {
@@ -34,7 +34,7 @@ const rows: Row[] = [
         value: `${LOCAL_COST_RANGE} a year`,
         sub: "Salary, super, WorkCover, leave and recruitment",
       },
-      freelancer: { value: "Hourly rates that vary and add up" },
+      contractor: { value: "Hourly rates that vary and add up" },
       trustedops: {
         value: `From ${FROM_PRICE}/month all-in`,
         sub: "Salary, benefits, supervision, HR, payroll and compliance in one price",
@@ -45,25 +45,17 @@ const rows: Row[] = [
     label: "Availability",
     cells: {
       local: { value: "Full-time, dedicated" },
-      freelancer: { value: "Part-time, shared with other clients" },
+      contractor: { value: "Part-time, shared with other clients" },
       trustedops: {
         value: "Full-time, dedicated to your account, with hours aligned to your Australian business day",
       },
     },
   },
   {
-    label: "Day-to-day supervision",
-    cells: {
-      local: { value: "On you" },
-      freelancer: { value: "On you" },
-      trustedops: { value: "Managed by our Philippines team" },
-    },
-  },
-  {
     label: "Payroll, HR and compliance",
     cells: {
       local: { value: "On you" },
-      freelancer: { value: "On you" },
+      contractor: { value: "On you" },
       trustedops: { value: "Included" },
     },
   },
@@ -71,7 +63,7 @@ const rows: Row[] = [
     label: "Choosing who you get",
     cells: {
       local: { value: "You run the recruitment" },
-      freelancer: { value: "Pick from profiles and hope" },
+      contractor: { value: "Pick from profiles and hope" },
       trustedops: { value: "Interview up to 3 pre-vetted candidates and approve who's assigned" },
     },
   },
@@ -79,7 +71,7 @@ const rows: Row[] = [
     label: "If it doesn't work out",
     cells: {
       local: { value: "Start recruiting again" },
-      freelancer: { value: "Start searching again" },
+      contractor: { value: "Start searching again" },
       trustedops: { value: "6-month replacement guarantee" },
     },
   },
@@ -87,7 +79,7 @@ const rows: Row[] = [
     label: "Time to get started",
     cells: {
       local: { value: "Weeks to months" },
-      freelancer: { value: "Fast, but hit and miss" },
+      contractor: { value: "Fast, but hit and miss" },
       trustedops: { value: "Meet candidates within ~2 weeks" },
     },
   },
