@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { readStored, useHydrated } from '@/lib/stored-form';
 import { ROLE_DATA, INITIAL } from '@/lib/calculator-data';
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -148,17 +149,19 @@ function CompBar({
 // ── Main component ────────────────────────────────────────────────────────
 
 export function CostCalculatorForm() {
-  const [s, setS] = useState<State>(INITIAL);
-  const [savedMsg, setSavedMsg] = useState(false);
+  // Server and hydration render the defaults; once hydrated, remount with any saved progress.
+  const hydrated = useHydrated();
+  return (
+    <CostCalculator
+      key={hydrated ? 'stored' : 'initial'}
+      initial={hydrated ? readStored(STORAGE_KEY, INITIAL) : INITIAL}
+    />
+  );
+}
 
-  useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
-      if (stored) setS({ ...INITIAL, ...stored });
-    } catch {
-      // ignore corrupt data
-    }
-  }, []);
+function CostCalculator({ initial }: { initial: State }) {
+  const [s, setS] = useState<State>(initial);
+  const [savedMsg, setSavedMsg] = useState(false);
 
   function upd<K extends keyof State>(k: K, v: State[K]) {
     setS((prev) => ({ ...prev, [k]: v }));

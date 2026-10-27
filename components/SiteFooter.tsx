@@ -47,7 +47,6 @@ export function SiteFooter() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-black/5 pt-6 text-xs text-brand-navy/60 md:flex-row md:items-center md:justify-between">
           <div>© {new Date().getFullYear()} TrustedOps. All rights reserved.</div>
-          <div>Built with Next.js + Tailwind.</div>
         </div>
       </Container>
     </footer>

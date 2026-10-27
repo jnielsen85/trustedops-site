@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { readStored, useHydrated } from '@/lib/stored-form';
 import { RampPlanGuide } from './RampPlanGuide';
 
 const STORAGE_KEY = 'trustedops_ramp_plan_v1';
@@ -144,18 +145,20 @@ function FormSection({
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function RampPlanForm() {
-  const [showGuide, setShowGuide] = useState(true);
-  const [data, setData] = useState<FormData>(INITIAL);
-  const [savedMsg, setSavedMsg] = useState(false);
+  // Server and hydration render the defaults; once hydrated, remount with any saved progress.
+  const hydrated = useHydrated();
+  return (
+    <RampPlan
+      key={hydrated ? 'stored' : 'initial'}
+      initial={hydrated ? readStored(STORAGE_KEY, INITIAL) : INITIAL}
+    />
+  );
+}
 
-  useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
-      if (stored) setData({ ...INITIAL, ...stored });
-    } catch {
-      // ignore corrupt data
-    }
-  }, []);
+function RampPlan({ initial }: { initial: FormData }) {
+  const [showGuide, setShowGuide] = useState(true);
+  const [data, setData] = useState<FormData>(initial);
+  const [savedMsg, setSavedMsg] = useState(false);
 
   // Generic string field setter
   const set = (key: string) =>

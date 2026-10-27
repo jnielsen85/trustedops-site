@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { readStored, useHydrated } from '@/lib/stored-form';
 
 const STORAGE_KEY = 'trustedops_role_scorecard_v1';
 
@@ -73,17 +74,19 @@ function FormSection({
 }
 
 export function RoleScorecardForm() {
-  const [data, setData] = useState<FormData>(INITIAL_DATA);
-  const [savedMsg, setSavedMsg] = useState(false);
+  // Server and hydration render the defaults; once hydrated, remount with any saved progress.
+  const hydrated = useHydrated();
+  return (
+    <RoleScorecard
+      key={hydrated ? 'stored' : 'initial'}
+      initial={hydrated ? readStored(STORAGE_KEY, INITIAL_DATA) : INITIAL_DATA}
+    />
+  );
+}
 
-  useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
-      if (stored) setData({ ...INITIAL_DATA, ...stored });
-    } catch {
-      // ignore corrupt data
-    }
-  }, []);
+function RoleScorecard({ initial }: { initial: FormData }) {
+  const [data, setData] = useState<FormData>(initial);
+  const [savedMsg, setSavedMsg] = useState(false);
 
   const set =
     (key: keyof FormData) =>
@@ -178,7 +181,7 @@ export function RoleScorecardForm() {
           <Field label="Location / timezone">
             <input
               className={inputCls}
-              placeholder="e.g., PH (AEST overlap 4hrs)"
+              placeholder="e.g., Manila, working AEST hours"
               value={data.location}
               onChange={set('location')}
             />
