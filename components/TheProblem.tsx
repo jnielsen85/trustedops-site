@@ -78,11 +78,6 @@ export function TheProblem() {
           </Card>
         ))}
       </div>
-
-      <p className="mt-8 max-w-3xl text-lg font-semibold text-brand-navy">
-        You don&apos;t need a bigger hiring budget. You need your time back, and a team that grows when
-        the business does.
-      </p>
     </PageSection>
   );
 }
