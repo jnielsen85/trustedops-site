@@ -19,9 +19,9 @@ export default function HomePage() {
         }
         title="Better Talent Economics"
         image={{
-          src: "/brand/twophworking.jpg",
-          alt: "Two people working together at a desk",
-          position: "center 8%",
+          src: "/brand/team-laptop-office.jpg",
+          alt: "Two colleagues reviewing work on a laptop in a bright, modern office",
+          position: "right 20%",
         }}
       >
         <p className="mt-5 text-base leading-relaxed text-brand-navy/70">

@@ -48,9 +48,13 @@ export default function HowItWorksPage() {
         kicker={<SectionEyebrow>What we do</SectionEyebrow>}
         title="Lower overhead. Increased capability."
         image={{
-          src: "/brand/phonphone.jpg",
-          alt: "Offshore team member on a call at their desk",
-          position: "center 30%",
+          src: "/brand/team-discussion-office.jpg",
+          alt: "Two colleagues discussing work across a desk in a modern office",
+          position: "33% 35%",
+          // A narrower frame than the default keeps the woman on the left clear of the text
+          left: "max(430px, calc(50% - 160px))",
+          fade: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 14%, #000 30%)",
+          raise: "-8%",
         }}
       >
         <p className="mt-5 text-base leading-relaxed text-brand-navy/70">

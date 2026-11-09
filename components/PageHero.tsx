@@ -7,6 +7,12 @@ type HeroImage = {
   alt: string;
   /** CSS object-position, to keep faces in frame as the crop changes */
   position?: string;
+  /** Desktop only: CSS left edge of the photo, for shots with a subject on their left */
+  left?: string;
+  /** Desktop only: CSS mask replacing the default fade */
+  fade?: string;
+  /** Desktop only: how far the photo extends above the hero (e.g. "-8%"), shifting it up */
+  raise?: string;
 };
 
 const fadeMask = "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 22%, #000 45%)";
@@ -55,9 +61,15 @@ export function PageHero({
       {image ? (
         <div
           className="absolute inset-y-0 right-0 hidden lg:block"
-          style={{ left: "max(36%, calc(50% - 280px))", WebkitMaskImage: fadeMask, maskImage: fadeMask }}
+          style={{
+            left: image.left ?? "max(36%, calc(50% - 280px))",
+            WebkitMaskImage: image.fade ?? fadeMask,
+            maskImage: image.fade ?? fadeMask,
+          }}
         >
-          {photo("64vw")}
+          <div className="absolute inset-x-0 bottom-0" style={{ top: image.raise ?? 0 }}>
+            {photo("64vw")}
+          </div>
         </div>
       ) : null}
 
