@@ -20,9 +20,12 @@ export default function ServicesPage() {
         kicker={<SectionEyebrow>Roles</SectionEyebrow>}
         title="Add Teammates, Not Overhead"
         image={{
-          src: '/brand/phmanhomework.jpg',
-          alt: 'Offshore team member working at a desk',
-          position: 'left center',
+          src: '/brand/team-laptops-desk.jpg',
+          alt: 'Two team members working side by side on laptops at a shared desk',
+          position: 'right 3%',
+          // A narrower frame than the default shows more of the photo, with less text over it
+          left: 'max(430px, calc(50% - 160px))',
+          fade: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 14%, #000 30%)',
         }}
       >
         <p className="mt-5 text-base leading-relaxed text-brand-navy/70">

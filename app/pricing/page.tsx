@@ -32,8 +32,9 @@ export default function PricingPage() {
         kicker={<SectionEyebrow>Pricing</SectionEyebrow>}
         title="Simple, transparent pricing"
         image={{
-          src: '/brand/phladysolowroking.jpg',
-          alt: 'Offshore team member working at a laptop',
+          src: '/brand/calculator-desk.jpg',
+          alt: 'Person using a calculator at a desk',
+          position: 'right 65%',
         }}
       >
         <p className="mt-5 text-base leading-relaxed text-brand-navy/70">
