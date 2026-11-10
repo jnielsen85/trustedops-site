@@ -78,11 +78,6 @@ export const SERVICES: ServiceCategory[] = [
           'Many Filipino CAD operators focus exclusively on complex drafting and detailing. They keep pace with high-volume projects and can update plans rapidly. Their English fluency means design revisions and annotations match client requirements exactly.',
       },
       {
-        name: 'Construction Surveyor',
-        description:
-          'Filipino surveyors use modern surveying software and GPS tools to gather site measurements. They can prepare land surveys, topographic maps and track project progress. Trained in international standards, they ensure data is communicated clearly and accurately for global teams.',
-      },
-      {
         name: 'Architect',
         description:
           'Philippines-trained architects offer skills in design, space planning and BIM coordination. They are fluent in English and proficient in design software (SketchUp, Revit) and can support everything from schematic design to preparing plan sets. Their Western-style education and hospitality culture often lead to a friendly, client-focused approach.',

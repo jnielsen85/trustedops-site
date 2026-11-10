@@ -13,7 +13,6 @@ export const ROLE_DATA: Record<string, Array<{ name: string; ph: number; au: num
     { name: 'Draftsman', ph: 16000, au: 75000 },
     { name: 'Estimator', ph: 18000, au: 110000 },
     { name: 'AutoCAD / CAD Designer', ph: 16000, au: 80000 },
-    { name: 'Construction Surveyor', ph: 18000, au: 95000 },
     { name: 'Architect', ph: 23000, au: 110000 },
     { name: 'Engineer (Civil / Structural)', ph: 24000, au: 110000 },
   ],
