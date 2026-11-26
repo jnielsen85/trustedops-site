@@ -11,6 +11,7 @@ const navBefore = [
 const navAfter = [
   { href: "/pricing", label: "Pricing" },
   { href: "/resources", label: "Resources" },
+  { href: "/about", label: "About" },
 ];
 
 const roleCategories = [
