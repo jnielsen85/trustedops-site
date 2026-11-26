@@ -49,7 +49,7 @@ export default function AboutPage() {
     <>
       <PageHero
         kicker={<SectionEyebrow>About us</SectionEyebrow>}
-        title="Tested inside a real business first"
+        title="Same Team. Different Postcode."
         image={{
           src: "/brand/team-philippines-celebration.jpg",
           alt: "James with the Philippines team, dressed in traditional Filipino attire at a team celebration",
